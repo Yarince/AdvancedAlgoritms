@@ -1,0 +1,46 @@
+To determine which of two strings comes first in alphabetical order, their first letters are compared. 
+If they differ, then the string whose first letter comes earlier in the alphabet comes before the other string. 
+If the first letters are the same, then the second letters are compared, and so on. 
+If a position is reached where one string has no more letters to compare while the other does, then the first (shorter) string is deemed to come first in alphabetical order.
+
+
+
+If I take an algorithm which sorts by alphabet i can reverse that and do the steps backwards. So in stead of sorting i can figure out why it is sorted.
+
+
+
+
+n1 = [A,B,C]
+n2 = [A,C]
+n3 = [A,C,B]
+
+order = []
+public String order(String[] order, int i){
+
+    if (i >= n1.length) {
+        order.add(n1);
+        return order;
+    }
+    
+    if (i >= n2.length) {
+        order.add(n2);
+        return order;
+    }
+    
+    if n1[i] > n2[i] 
+    {
+        order.add(n1);
+        return order;
+    }
+    else if n2[i] > n1[i]
+    {
+        order.add(n2);
+        return order;
+    }
+    else if n1[i] == n2[i]
+    {
+        order(order, i+1);
+    }
+}
+
+

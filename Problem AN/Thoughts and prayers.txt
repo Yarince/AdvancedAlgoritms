@@ -1,0 +1,60 @@
+
+// This works with duplicates and is reversed both ways
+https://codegolf.stackexchange.com/questions/114883/i-give-you-nth-permutation-you-give-me-n/115024#115024
+
+
+Find the reverse of this:
+https://stackoverflow.com/questions/5131497/find-the-index-of-a-given-permutation-in-the-sorted-list-of-the-permutations-of
+
+Sort the input string!
+https://stackoverflow.com/questions/44204548/how-to-find-nth-anagram-in-a-given-set-of-time
+
+
+Rules:
+
+1: Find all anagrams
+2: Sort the whole list
+3: Grab the Kth one
+
+
+
+
+
+1
+BMI 5
+
+
+
+
+Only works for unique characters :
+
+https://www.quora.com/How-can-we-find-the-lexicographically-Kth-permutation-of-the-sequence-1-N-efficiently
+https://medium.com/@aiswaryamathur/find-the-n-th-permutation-of-an-ordered-string-using-factorial-number-system-9c81e34ab0c8
+
+
+
+BIM
+5 factoradic = 210
+
+2 M   BI
+1 MI  B
+0 MIB
+
+
+DLLW
+6 factoradic = 1000
+
+1 L DLW
+0 LL DW ~
+0 LLD W
+0 LLDW
+
+
+HGJH -> GHHJ
+10 factoradic = 1200
+
+1 H GHJ
+2 HJ GH
+0 HJG H
+0 HJGH
+
