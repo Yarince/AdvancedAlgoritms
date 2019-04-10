@@ -1,0 +1,3 @@
+Lengte van de coordinaten is de breedte van de array
+
+

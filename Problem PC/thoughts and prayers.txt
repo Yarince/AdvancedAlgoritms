@@ -1,0 +1,44 @@
+Als ze hetzelfde zijn:
+
+zoek naar een team waarin 1 of 2 bevind en plaats de andere daarbij
+Als er geen team gevonden is dan:
+    zoek naar een set waar een van de 2 in zit en plaats ze samen in die set
+    als die ook niet gevonden is dan:
+        plaats ze samen in een set
+
+als ze niet hetzelfde zijn:
+
+Plaats ze in het andere team waar 1 of 2 in zit
+Als 1 en 2 niet in een team zitten dan:
+    Zoek naar een set waar 1 of 2 in zit en
+
+
+
+1 0 1
+1 1 2
+2 0 5
+3 0 2
+3 8 9
+4 1 5
+4 1 2
+4 8 9
+1 8 9
+1 5 2
+3 5 2
+
+1 0 8
+2 12 13
+
+
+
+team 1: 0,1,2
+team 2: 5
+
+sameSet: 8,9
+notSameSet: 12,13
+
+output: true, unknown, true, false, unknown, contradicting, false
+
+
+USE red green graph!!!!
+DFS om te zoeken naar partners
