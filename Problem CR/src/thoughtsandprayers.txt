@@ -1,17 +1,31 @@
 
-1.  Get triple that is balanced
-2.  Add the first available next molecule to the triple to create the first
-    group
-3.  Check if every triple in the group is still balanced
-    - If not: Remove the last added molecule continue at step (2)
-    - If yes: Save the group and continue at step (2)
-4. If all the combinations are made with the beginning triple are made go to
-    the next start triple and continue at step (1)
+
+1. Get all possible combinations of triples
+2. Get all the balanced triples
+3. take the first balanced triple
+4. take another random number
+5. check if all combinations of these numbers are balanced
+    - if not: delete number
+    - if yes: goto 6
+6. save number
+7. goto step 4
 
 
-Repeat until all possible combinations are made. Take the biggest
+
+Save what numbers have been checked before.
+    Even before generating new triples.
+
+Save what combo of numbers didn't work.
+like:
+    1. 123
+         +4
+         1234 X
+    2 124
+         +3
+         1234 X
+
+Duplicate work
+DOM!!!
 
 
-
-Should remember which combo's don't work and only test the next ones with
- the working ones
+2

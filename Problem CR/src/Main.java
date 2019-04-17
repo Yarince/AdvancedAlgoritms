@@ -1,11 +1,9 @@
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
-    private static final ArrayList<Pair<Integer>> EDGES = new ArrayList<>();
-    private static int[] moleculeArray;
+    private static ArrayList<Pair<Integer>> EDGES = new ArrayList<>();
+    private static ArrayList<Integer> moleculeArray;
 
     public static void main(String[] args) {
         process(new Scanner(System.in));
@@ -24,9 +22,9 @@ public class Main {
     private static void processCase(Scanner in, int fragmentNumber) {
         int molecules = in.nextInt();
         int positiveEdges = in.nextInt();
-        moleculeArray = new int[molecules];
-        for (int i = 0; i < molecules; i++) {
-            moleculeArray[i] = i + 1;
+        moleculeArray = new ArrayList<>();
+        for (int i = 1; i <= molecules; i++) {
+            moleculeArray.add(i);
         }
         for (int i = 0; i < positiveEdges; i++) {
             EDGES.add(new Pair<>(in.nextInt(), in.nextInt()));
@@ -34,82 +32,84 @@ public class Main {
 
         RESULT.append(fragmentNumber)
                 .append(": ")
-                .append(executeCommands(molecules))
+                .append(executeCommands())
                 .append('\n');
     }
 
-    static Tree tree;
+    private static int executeCommands() {
 
-    private static int executeCommands(int molecules) {
+        ArrayList<List<Integer>> allTriples = getTriples(moleculeArray, new int[3], 0, 0);
+        int biggestGroupSize = 0;
+        ArrayList<List<Integer>> balancedTriples = new ArrayList<>();
 
-        ArrayList<int[]> allTriples = getTriples(moleculeArray, new int[molecules], 0, 0);
 
-        ArrayList<int[]> groups = new ArrayList<>();
-        for (int[] triple : allTriples) {
+        for (List<Integer> triple : allTriples) {
             boolean balanced = isBalanced(triple);
-            if (balanced) {
-                groups.add(triple);
-                groups.addAll(createGroup(groups, new ArrayList<>(), 0));
-            }
+            if (balanced)
+                balancedTriples.add(triple);
         }
-        return groups.size();
-    }
 
-    private static ArrayList<int[]> createGroup(ArrayList<int[]> balancedTriples, ArrayList<Integer> group, int index) {
-//        int[] startTriple = balancedTriples.get(index);
-        // loop one by one through all possibilities
+        int[] frequency = new int[moleculeArray.size()];
 
+        for (List<Integer> triple : balancedTriples) {
+            frequency[triple.get(0) - 1]++;
+            frequency[triple.get(1) - 1]++;
+            frequency[triple.get(2) - 1]++;
+        }
 
+        ArrayList<Integer> group;
 
-        // TODO Find out what the next step is. Need to check if every combination in the group is
-        //  still balanced or the last added should be removed and replaced by the next molecule available in the array.
-        //  This also changes the for loop with molecule array.
-        //  First do the is balanced check before actually adding it to the group or something.
-//        boolean balanced = isBalanced(group[0], group[1], group[2]);
-        // If the correct triple is balanced
-//        if (balanced) {
-            for (int extraMolecule : moleculeArray) {
-                // Check if extra molecule isn't already in current triple
-                if (group.contains(extraMolecule))
-                    continue;
-                // add extraMolecule to the triple
-                group.add(extraMolecule);
+        for (List<Integer> triple : balancedTriples) {
+            group = new ArrayList<>(triple);
 
-                // Get new triples
-                ArrayList<int[]> triples = getTriples(group, new int[group.size()], 0, 0);
-                boolean balanced = true;
-                for (int[] triple : triples) {
-                    if (!balancedTriples.contains(triple) && balanced) {
-                        balanced = isBalanced(triple);
-                    }
+            int nextNumber = 1;
+
+            while (nextNumber <= moleculeArray.size()) {
+                // Get a number that is not equal to the numbers currently in the triple
+                // Or the number is in the group less than there are combinations
+                if (!group.contains(1)) {
+                    group = new ArrayList<>();
+                    break;
                 }
-                if (balanced){
-
-
-
+                while (group.contains(nextNumber) || frequency[nextNumber - 1] < 4) {
+                    nextNumber++;
+                    if (nextNumber > moleculeArray.size()) break;
                 }
 
-                for (int[] x : triples) {
-                    if (!balancedTriples.contains(x))
-                        balancedTriples.add(x);
+                group.add(nextNumber);
+                ArrayList<List<Integer>> newTriples = getTriples(group, new int[3], 0, 0);
+
+
+                if (!balancedTriples.containsAll(newTriples)) {
+                    group.remove(group.size() - 1);
+                    nextNumber++;
                 }
 
+//                boolean unbalanced = false;
+//                    for (List<Integer> newTriple : newTriples) {
+//                        // if(Arrays.equals(newTriple, triple)) continue;
+//                        if (unbalanced) break;
+//                        if (!balancedTriples.contains(newTriple)) {
+//                            group.remove(group.size() - 1);
+//                            unbalanced = true;
+//                            nextNumber++;
+//                        }
+//                    }
             }
-            // Recursively try to create the biggest group of balanced triples
-            if (index < balancedTriples.size())
-                return createGroup(balancedTriples, new ArrayList<>(), index + 1);
-//        } else {
-//            balancedTriples.remove(group);
-//        }
 
-        return balancedTriples;
+            if (group.size() > biggestGroupSize)
+                biggestGroupSize = group.size();
+        }
+
+        EDGES = new ArrayList<>();
+        moleculeArray = new ArrayList<>();
+        return biggestGroupSize;
     }
 
-
-    private static boolean isBalanced(int[] triple) {
-        Pair<Integer> ab = new Pair<>(triple[0], triple[1]);
-        Pair<Integer> ac = new Pair<>(triple[0], triple[2]);
-        Pair<Integer> bc = new Pair<>(triple[1], triple[2]);
+    private static boolean isBalanced(List<Integer> triple) {
+        Pair<Integer> ab = new Pair<>(triple.get(0), triple.get(1));
+        Pair<Integer> ac = new Pair<>(triple.get(0), triple.get(2));
+        Pair<Integer> bc = new Pair<>(triple.get(1), triple.get(2));
         if (EDGES.contains(ab) ^ EDGES.contains(ac) ^ EDGES.contains(bc))
             return true;
         else if (EDGES.contains(ab) && EDGES.contains(bc) && EDGES.contains(ac))
@@ -121,14 +121,16 @@ public class Main {
     /**
      * Source: https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
      */
-    private static ArrayList<int[]> getTriples(ArrayList<Integer> arr, int[] data, int start, int index) {
+    private static ArrayList<List<Integer>> getTriples(ArrayList<Integer> arr, int[] data, int start, int index) {
         int end = arr.size() - 1;
         int r = 3;
-        ArrayList<int[]> permutations = new ArrayList<>();
+        ArrayList<List<Integer>> permutations = new ArrayList<>();
         // Current combination is ready to be printed, print it
         if (index == r) {
-            int[] permutation = new int[r];
-            System.arraycopy(data, 0, permutation, 0, r);
+            List<Integer> permutation = new ArrayList<>();
+            for (int i = 0; i < r; i++) {
+                permutation.add(data[i]);
+            }
             permutations.add(permutation);
             return permutations;
         }
@@ -149,7 +151,7 @@ public class Main {
         final T left;
         final T right;
 
-        public Pair(T left, T right) {
+        Pair(T left, T right) {
             if (left == null || right == null) {
                 throw new IllegalArgumentException("left and right must be non-null!");
             }

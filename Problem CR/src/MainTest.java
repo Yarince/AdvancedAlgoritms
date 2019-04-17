@@ -63,9 +63,9 @@ public class MainTest {
         ArrayList<String[]> list = new ArrayList<>();
         String filePath = new File("").getAbsolutePath();
         try {
-            for (int i = 1; i < 8; i++) {
-                String input = new String(Files.readAllBytes(Paths.get(String.format("%s/src/cr/%s.in", filePath, 900+i))), StandardCharsets.UTF_8);
-                String output = new String(Files.readAllBytes(Paths.get(String.format("%s/src/cr/%s.out", filePath, 900+i))), StandardCharsets.UTF_8);
+            for (int i = 1; i <= 8; i++) {
+                String input = Files.readString(Paths.get(String.format("%s/src/cr/%s.in", filePath, 900+i)));
+                String output = Files.readString(Paths.get(String.format("%s/src/cr/%s.out", filePath, 900+i)));
                 list.add(new String[]{input, output});
             }
         } catch (IOException e) {
