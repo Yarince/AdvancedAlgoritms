@@ -22,7 +22,7 @@ like:
          1234 X
     2 124
          +3
-         1234 X
+         1243 X
 
 Duplicate work
 DOM!!!

@@ -58,6 +58,7 @@ public class Main {
         }
 
         ArrayList<Integer> group;
+        HashSet<ArrayList<Integer>> badGroups = new HashSet<>();
 
         for (List<Integer> triple : balancedTriples) {
             group = new ArrayList<>(triple);
@@ -68,33 +69,28 @@ public class Main {
                 // Get a number that is not equal to the numbers currently in the triple
                 // Or the number is in the group less than there are combinations
                 if (!group.contains(1)) {
-                    group = new ArrayList<>();
+                    badGroups.add(group);
                     break;
                 }
-                while (group.contains(nextNumber) || frequency[nextNumber - 1] < 4) {
+//                if (badGroups.contains(group))
+//                    break;
+
+                while ((group.contains(nextNumber) || frequency[nextNumber - 1] < 4)) {
                     nextNumber++;
                     if (nextNumber > moleculeArray.size()) break;
                 }
+//                if (nextNumber > moleculeArray.size()) break;
 
                 group.add(nextNumber);
+//                Collections.sort(group);
                 ArrayList<List<Integer>> newTriples = getTriples(group, new int[3], 0, 0);
 
 
                 if (!balancedTriples.containsAll(newTriples)) {
+                    badGroups.add(group);
                     group.remove(group.size() - 1);
                     nextNumber++;
                 }
-
-//                boolean unbalanced = false;
-//                    for (List<Integer> newTriple : newTriples) {
-//                        // if(Arrays.equals(newTriple, triple)) continue;
-//                        if (unbalanced) break;
-//                        if (!balancedTriples.contains(newTriple)) {
-//                            group.remove(group.size() - 1);
-//                            unbalanced = true;
-//                            nextNumber++;
-//                        }
-//                    }
             }
 
             if (group.size() > biggestGroupSize)
@@ -131,6 +127,8 @@ public class Main {
             for (int i = 0; i < r; i++) {
                 permutation.add(data[i]);
             }
+            // this fixes and breaks everything
+            Collections.sort(permutation);
             permutations.add(permutation);
             return permutations;
         }
