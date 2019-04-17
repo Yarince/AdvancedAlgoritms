@@ -1,8 +1,10 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<Pair<Integer>> EDGES = new ArrayList<>();
+    private static ArrayList<int[]> EDGES = new ArrayList<int[]>();
     private static ArrayList<Integer> moleculeArray;
 
     public static void main(String[] args) {
@@ -27,7 +29,7 @@ public class Main {
             moleculeArray.add(i);
         }
         for (int i = 0; i < positiveEdges; i++) {
-            EDGES.add(new Pair<>(in.nextInt(), in.nextInt()));
+            EDGES.add(new int[]{in.nextInt(), in.nextInt()});
         }
 
         RESULT.append(fragmentNumber)
@@ -38,12 +40,12 @@ public class Main {
 
     private static int executeCommands() {
 
-        ArrayList<List<Integer>> allTriples = getTriples(moleculeArray, new int[3], 0, 0);
+        ArrayList<Triple> allTriples = getTriples(moleculeArray, new Triple(), 0, 0);
         int biggestGroupSize = 0;
-        ArrayList<List<Integer>> balancedTriples = new ArrayList<>();
+        ArrayList<Triple> balancedTriples = new ArrayList<>();
 
 
-        for (List<Integer> triple : allTriples) {
+        for (Triple triple : allTriples) {
             boolean balanced = isBalanced(triple);
             if (balanced)
                 balancedTriples.add(triple);
@@ -51,31 +53,31 @@ public class Main {
 
         int[] frequency = new int[moleculeArray.size()];
 
-        for (List<Integer> triple : balancedTriples) {
+        for (Triple triple : balancedTriples) {
             frequency[triple.get(0) - 1]++;
             frequency[triple.get(1) - 1]++;
             frequency[triple.get(2) - 1]++;
         }
 
-        int groupIndex = 0;
         ArrayList<Integer> group;
-        ArrayList<HashSet<Integer>> badGroups = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> badGroups = new ArrayList<>();
 
-        for (List<Integer> triple : balancedTriples) {
-            group = new ArrayList<>(triple);
+        for (Triple triple : balancedTriples) {
+            group = new ArrayList<>();
+            group.add(triple.left);
+            group.add(triple.middle);
+            group.add(triple.right);
 
             int nextNumber = 1;
 
             while (nextNumber <= moleculeArray.size()) {
-                // Get a number that is not equal to the numbers currently in the triple
-                // Or the number is in the group less than there are combinations
-                if (!group.contains(1)) {
-                    badGroups.add(new HashSet<>(group));
-                    break;
-                }
-                if (badGroups.contains(new HashSet<>(group)))
+
+                // if the group doesn't contain the root node it's bad
+                if (!group.contains(1))
                     break;
 
+                // Get a number that is not equal to the numbers currently in the triple
+                // Or the number is in the group less than there are combinations
                 while ((group.contains(nextNumber) || frequency[nextNumber - 1] < 4)) {
                     nextNumber++;
                     if (nextNumber > moleculeArray.size()) break;
@@ -83,11 +85,24 @@ public class Main {
                 if (nextNumber > moleculeArray.size()) break;
 
                 group.add(nextNumber);
-                ArrayList<List<Integer>> newTriples = getTriples(group, new int[3], 0, 0);
+
+                // If the group is already known for it's bad qualities it should not be selected
+                boolean skip = false;
+                for (ArrayList<Integer> badGroup : badGroups) {
+                    if (skip) break;
+                    if (badGroup.containsAll(group) && group.containsAll(badGroup)) {
+                        group.remove(group.size() - 1);
+                        nextNumber++;
+                        skip = true;
+                    }
+                }
+                if (skip) continue;
+
+                ArrayList<Triple> newTriples = getTriples(group, new Triple(), 0, 0);
 
 
                 if (!balancedTriples.containsAll(newTriples)) {
-                    badGroups.add(new HashSet<>(group));
+                    badGroups.add(new ArrayList<>(group));
                     group.remove(group.size() - 1);
                     nextNumber++;
                 }
@@ -102,34 +117,40 @@ public class Main {
         return biggestGroupSize;
     }
 
-    private static boolean isBalanced(List<Integer> triple) {
-        Pair<Integer> ab = new Pair<>(triple.get(0), triple.get(1));
-        Pair<Integer> ac = new Pair<>(triple.get(0), triple.get(2));
-        Pair<Integer> bc = new Pair<>(triple.get(1), triple.get(2));
-        if (EDGES.contains(ab) ^ EDGES.contains(ac) ^ EDGES.contains(bc))
+    private static boolean isBalanced(Triple triple) {
+        int[] ab = new int[]{triple.get(0), triple.get(1)};
+        int[] ac = new int[]{triple.get(0), triple.get(2)};
+        int[] bc = new int[]{triple.get(2), triple.get(1)};
+        if (arrayContains(EDGES, ab) ^ arrayContains(EDGES, ac) ^ arrayContains(EDGES, bc))
             return true;
-        else if (EDGES.contains(ab) && EDGES.contains(bc) && EDGES.contains(ac))
+        else if (arrayContains(EDGES, ab) && arrayContains(EDGES, ac) && arrayContains(EDGES, bc))
             return true;
 
         else return false;
     }
 
+    private static boolean arrayContains(ArrayList<int[]> array, int[] value) {
+        boolean contains = false;
+        for (int[] ints : array) {
+            if (contains) break;
+            if ((ints[0] == value[1] && ints[1] == value[0]) ||
+                    (ints[0] == value[0] && ints[1] == value[1]))
+                contains = true;
+        }
+        return contains;
+
+    }
+
     /**
      * Source: https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
      */
-    private static ArrayList<List<Integer>> getTriples(ArrayList<Integer> arr, int[] data, int start, int index) {
+    private static ArrayList<Triple> getTriples(ArrayList<Integer> arr, Triple data, int start, int index) {
         int end = arr.size() - 1;
         int r = 3;
-        ArrayList<List<Integer>> permutations = new ArrayList<>();
+        ArrayList<Triple> permutations = new ArrayList<>();
         // Current combination is ready to be printed, print it
         if (index == r) {
-            List<Integer> permutation = new ArrayList<>();
-            for (int i = 0; i < r; i++) {
-                permutation.add(data[i]);
-            }
-            // NOTE this fixes and breaks everything
-            Collections.sort(permutation);
-            permutations.add(permutation);
+            permutations.add(data);
             return permutations;
         }
 
@@ -138,42 +159,90 @@ public class Main {
         // at index will make a combination with remaining elements
         // at remaining positions
         for (int i = start; i <= end && end - i + 1 >= r - index; i++) {
-            data[index] = arr.get(i);
+            data = new Triple(data, index, arr.get(i));
+//            data.put(index, arr.get(i));
             permutations.addAll(getTriples(arr, data, i + 1, index + 1));
         }
         return permutations;
     }
 
-    final static class Pair<T> {
+    final static class Triple {
 
-        final T left;
-        final T right;
+        final int left;
+        final int right;
+        final int middle;
 
-        Pair(T left, T right) {
-            if (left == null || right == null) {
-                throw new IllegalArgumentException("left and right must be non-null!");
+
+        Triple() {
+            left = 0;
+            right = 0;
+            middle = 0;
+        }
+
+        Triple(Triple data, int index, int value) {
+            switch (index) {
+                case 0:
+                    right = data.right;
+                    middle = data.middle;
+                    left = value;
+                    break;
+                case 1:
+
+                    right = data.right;
+                    left = data.left;
+                    middle = value;
+                    break;
+                case 2:
+                    left = data.left;
+                    middle = data.middle;
+                    right = value;
+                    break;
+                default:
+                    left = 0;
+                    right = 0;
+                    middle = 0;
+                    RESULT.append("broken");
+                    break;
             }
-            this.left = left;
-            this.right = right;
         }
 
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            Pair<?> pair = (Pair<?>) o;
-            return (left.equals(pair.left) && right.equals(pair.right)) ||
-                    (left.equals(pair.right) && right.equals(pair.left));
+            Triple triple = (Triple) o;
+            return (left == triple.left && right == triple.right && middle == (triple.middle)) ||
+                    (left == (triple.right) && right == (triple.left) && middle == (triple.middle)) ||
+
+                    (left == (triple.left) && right == (triple.middle) && middle == (triple.right)) ||
+                    (left == (triple.middle) && right == (triple.left) && middle == (triple.right)) ||
+
+                    (left == (triple.middle) && right == (triple.right) && middle == (triple.left)) ||
+                    (left == (triple.right) && right == (triple.middle) && middle == (triple.left))
+                    ;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(left, right);
+            return Objects.hash(left, middle, right);
         }
 
         @Override
         public String toString() {
-            return left + " - " + right;
+            return left + " - " + middle + " - " + right;
+        }
+
+        int get(int i) {
+            switch (i) {
+                case 0:
+                    return left;
+                case 1:
+                    return middle;
+                case 2:
+                    return right;
+                default:
+                    return middle; // finger
+            }
         }
     }
 }
