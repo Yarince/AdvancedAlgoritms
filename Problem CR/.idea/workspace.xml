@@ -4,7 +4,6 @@
     <list default="true" id="7205fa10-b721-4343-8675-f3fe616ced17" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thoughtsandprayers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/thoughtsandprayers.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +19,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Main.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+                <state relative-caret-position="455">
+                  <caret line="85" column="40" lean-forward="true" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
                 </state>
               </provider>
             </entry>
@@ -153,7 +152,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555524295338" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555524542319" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Problem TN" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -217,7 +216,7 @@
       <workItem from="1554717101270" duration="786000" />
       <workItem from="1554989622512" duration="9564000" />
       <workItem from="1555338031617" duration="14885000" />
-      <workItem from="1555497258171" duration="18562000" />
+      <workItem from="1555497258171" duration="18825000" />
     </task>
     <task id="LOCAL-00001" summary="Somethings work">
       <created>1555523484736</created>
@@ -226,28 +225,17 @@
       <option name="project" value="LOCAL" />
       <updated>1555523484736</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="a fix and a break&#10;All test succeed. Slow af">
+      <created>1555524366945</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1555524366945</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="MainTest_process - 2019.04.17 at 19h 39m 26s.xml">
-      <configuration name="MainTest.process" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_process - 2019.04.17 at 19h 39m 30s.xml">
-      <configuration name="MainTest.process" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_process - 2019.04.17 at 19h 40m 46s.xml">
-      <configuration name="MainTest.process" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_process - 2019.04.17 at 19h 42m 58s.xml">
-      <configuration name="MainTest.process" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_process - 2019.04.17 at 19h 45m 51s.xml">
-      <configuration name="MainTest.process" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_process - 2019.04.17 at 19h 45m 55s.xml">
-      <configuration name="MainTest.process" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="MainTest_process - 2019.04.17 at 19h 46m 36s.xml">
       <configuration name="MainTest.process" configurationId="JUnit" />
     </history-entry>
@@ -260,9 +248,27 @@
     <history-entry file="MainTest_process - 2019.04.17 at 19h 56m 01s.xml">
       <configuration name="MainTest.process" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="MainTest_process - 2019.04.17 at 20h 02m 42s.xml">
+      <configuration name="MainTest.process" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_process - 2019.04.17 at 20h 03m 13s.xml">
+      <configuration name="MainTest.process" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_process - 2019.04.17 at 20h 03m 33s.xml">
+      <configuration name="MainTest.process" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_process - 2019.04.17 at 20h 03m 48s.xml">
+      <configuration name="MainTest.process" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_process - 2019.04.17 at 20h 04m 16s.xml">
+      <configuration name="MainTest.process" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MainTest_process - 2019.04.17 at 20h 05m 09s.xml">
+      <configuration name="MainTest.process" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43797000" />
+    <option name="totallyTimeSpent" value="44060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="1037" extended-state="6" />
@@ -308,7 +314,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Before everything went to shit" />
     <MESSAGE value="Somethings work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Somethings work" />
+    <MESSAGE value="a fix and a break&#10;All test succeed. Slow af" />
+    <option name="LAST_COMMIT_MESSAGE" value="a fix and a break&#10;All test succeed. Slow af" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -316,7 +323,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <condition expression="group.size == 5" language="JAVA" />
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>86</line>
+          <line>85</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
@@ -506,8 +513,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+        <state relative-caret-position="455">
+          <caret line="85" column="40" lean-forward="true" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
         </state>
       </provider>
     </entry>
