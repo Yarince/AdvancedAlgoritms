@@ -1,0 +1,11 @@
+Elke boom met 3 nodes met linker(L) en rechter(R) sub bomen is genummerd met N zo dat alle bomen met 3 nodes genummerd
+met een getal groter dan N voldoen aan:
+- De linker sub boom is genummerd groter dan L
+of
+- Een linker sub boom gelijk is aan L en een rechter sub boom genummerd hoger dan R
+
+2   *
+     \
+      *
+
+3   *

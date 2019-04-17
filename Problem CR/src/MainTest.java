@@ -41,7 +41,7 @@ public class MainTest {
             e.printStackTrace();
         }
 
-        Main.result.delete(0, Main.result.length());
+        Main.RESULT.delete(0, Main.RESULT.length());
     }
 
     public MainTest(String input, String expected) {
@@ -63,7 +63,7 @@ public class MainTest {
         ArrayList<String[]> list = new ArrayList<>();
         String filePath = new File("").getAbsolutePath();
         try {
-            for (int i = 1; i < 14; i++) {
+            for (int i = 1; i < 8; i++) {
                 String input = new String(Files.readAllBytes(Paths.get(String.format("%s/src/cr/%s.in", filePath, 900+i))), StandardCharsets.UTF_8);
                 String output = new String(Files.readAllBytes(Paths.get(String.format("%s/src/cr/%s.out", filePath, 900+i))), StandardCharsets.UTF_8);
                 list.add(new String[]{input, output});

@@ -1,0 +1,17 @@
+
+1.  Get triple that is balanced
+2.  Add the first available next molecule to the triple to create the first
+    group
+3.  Check if every triple in the group is still balanced
+    - If not: Remove the last added molecule continue at step (2)
+    - If yes: Save the group and continue at step (2)
+4. If all the combinations are made with the beginning triple are made go to
+    the next start triple and continue at step (1)
+
+
+Repeat until all possible combinations are made. Take the biggest
+
+
+
+Should remember which combo's don't work and only test the next ones with
+ the working ones
