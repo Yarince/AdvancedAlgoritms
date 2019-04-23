@@ -1,117 +1,161 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Main {
-//
-    public static void main(String args[]) {
-        ArrayList<Node> totalTreesFrom1toN = constructTrees(1, 3);
-        /* Printing preorder traversal of all constructed BSTs */
-        System.out.println("Preorder traversals of all constructed BSTs are ");
-        for (int i = 0; i < totalTreesFrom1toN.size(); i++) {
-            preorder(totalTreesFrom1toN.get(i));
-//            System.out.println(result);
-            System.out.println();
-        }
+    static StringBuilder result;
+    private static int[] preCalculatedCatalans =
+            new int[]{
+                    1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 9694845, 35357670, 129644790, 477638700
+            };
+
+    private static int[] arr;
+
+    public static void main(String[] args) {
+        process(new Reader(System.in));
     }
 
-//    public static void main(String[] args) {
-//        process(new Scanner(System.in));
-//    }
+    static void process(Reader reader) {
+        try {
+            StringBuilder b = new StringBuilder();
+            int numCases = Integer.valueOf(reader.readLine());
 
-    static final StringBuilder result = new StringBuilder();
+            for (int i = 0; i < numCases; i++) {
 
-    static void process(Scanner in) {
-        int fragments = in.nextInt();
-        for (int i = 1; i <= fragments; i++) {
-            processCase(in, i);
-        }
-        System.out.print(result.toString());
-    }
-
-    private static void processCase(Scanner in, int fragmentNumber) {
-        long startCoordinate = in.nextLong();
-
-        result.append(fragmentNumber)
-                .append(": ")
-                .append(executeCommands(startCoordinate))
-                .append('\n');
-    }
-
-    private static String executeCommands(long treeNumber) {
-        ArrayList<Node> totalTreesFrom1toN = constructTrees(1, treeNumber);
-        for (Node node : totalTreesFrom1toN) {
-            preorder(node);
-        }
-        return "";
-    }
-
-    // A Java prgroam to contrcut all unique BSTs for keys from 1 to n
-
-
-    // function for constructing trees
-    private static ArrayList<Node> constructTrees(long start, long end) {
-        ArrayList<Node> list = new ArrayList<>();
-		/* if start > end then subtree will be empty so returning NULL
-			in the list */
-        if (start > end) {
-            list.add(null);
-            return list;
-        }
-
-		/* iterating through all values from start to end for constructing\
-			left and right subtree recursively */
-        for (long i = start; i <= end; i++) {
-            /* constructing left subtree */
-            ArrayList<Node> leftSubtree = constructTrees(start, i - 1);
-
-            /* constructing right subtree */
-            ArrayList<Node> rightSubtree = constructTrees(i + 1, end);
-
-			/* now looping through all left and right subtrees and connecting
-				them to ith root below */
-            for (int j = 0; j < leftSubtree.size(); j++) {
-                Node left = leftSubtree.get(j);
-                for (int k = 0; k < rightSubtree.size(); k++) {
-                    Node right = rightSubtree.get(k);
-                    Node node = new Node(i);     // making value i as root
-                    node.left = left;             // connect left subtree
-                    node.right = right;         // connect right subtree
-                    list.add(node);             // add this tree to list
+                b.append(i + 1);
+                b.append(": ");
+                b.append(makeTree(reader.readLine()));
+                if (i != numCases - 1) {
+                    b.append("\n");
                 }
+                result = new StringBuilder();
+            }
+
+            System.out.println(b.toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private static String makeTree(String input) {
+        StringBuilder b = new StringBuilder();
+
+        int numNodes = getCatalanStartNumber(Integer.valueOf(input)) - 1;
+        int number = Integer.valueOf(input);
+
+        int startNum = 0;
+
+        for (int i = 1; i < numNodes; i++) {
+            startNum += preCalculatedCatalans[i];
+        }
+
+        startNum++;
+
+        int diff = number - startNum + 1;
+
+        rankinverse(diff, numNodes);
+        Node s = generateTree(arr, numNodes);
+        inOrderRepr(s, b);
+
+        return result.toString();
+    }
+
+    private static int getCatalanStartNumber(int num) {
+        int catalan = 0;
+        int curr = 0;
+
+        while (num >= catalan) {
+            catalan += preCalculatedCatalans[curr];
+            curr++;
+        }
+
+        return curr;
+    }
+
+    private static Node generateTree(int[] arr, int numNodes) {
+        Node root = new Node(0);
+        root.setData(arr[1]);
+
+        for (int i = 2; i < numNodes + 1; i++) {
+            int data = arr[i];
+
+            Node newNode = new Node(data);
+            insertNode(root, newNode);
+        }
+
+        return root;
+    }
+
+    private static void insertNode(Node parent, Node insert) {
+        if (insert.getData() < parent.getData()) {
+            // Check left
+            if (parent.getLeft() == null) {
+                parent.setLeft(insert);
+            } else {
+                insertNode(parent.getLeft(), insert);
+            }
+        } else {
+            // Check right
+            if (parent.getRight() == null) {
+                parent.setRight(insert);
+            } else {
+                insertNode(parent.getRight(), insert);
             }
         }
-        return list;
     }
 
-    // A utility function to do preorder traversal of BST
-//    static void preorder(Node root) {
-//        if (root != null) {
-//            result.append(root.key + " ");
-//            preorder(root.left);
-//            preorder(root.right);
-//        }
-//    }
+    private static void rankinverse(int i, int n) {
+        arr = new int[n + 1];
+        ri(i, n, 1, 0);
+    }
 
-    static void preorder(Node root)
-    {
-        if (root != null)
-        {
-            System.out.print(root.key+" ") ;
-            preorder(root.left);
-            preorder(root.right);
+    private static void ri(int i, int n, int a, int s) {
+        int j = 0;
+        int k = 0, v = 0, h = 0, w = 0, y = 0;
+
+        while (i > 0) {
+            k = n - j - 1;
+            h = preCalculatedCatalans[k];
+            v = preCalculatedCatalans[j] * h;
+            i = i - v;
+            j = j + 1;
+        }
+
+        i = i + v;
+        j = j - 1;
+        arr[a] = j + 1 + s;
+        y = (i - 1 - ((i - 1) / h) * h) + 1;
+        w = ((i - y) / h) + 1;
+
+        if (j > 1) {
+            ri(w, j, a + 1, s);
+        } else if (j == 1) {
+            arr[a + 1] = s + 1;
+        }
+
+        if (k > 1) {
+            ri(y, k, a + j + 1, s + j + 1);
+        } else if (k == 1) {
+            arr[a + j + 1] = s + j + 2;
         }
     }
 
-}
+    private static void inOrderRepr(Node node, StringBuilder b) {
+        if (node == null) {
+            return;
+        }
 
-// node structure
-class Node {
-    long key;
-    Node left, right;
+        // Left
+        if (node.hasLeft()) {
+            result.append("(");
+            inOrderRepr(node.getLeft(), b);
+            result.append(")");
+        }
 
-    Node(long data) {
-        this.key = data;
-        left = right = null;
+        // Root
+        result.append("X");
+
+        // Right
+        if (node.hasRight()) {
+            result.append("(");
+            inOrderRepr(node.getRight(), b);
+            result.append(")");
+        }
     }
-
 }

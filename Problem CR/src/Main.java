@@ -44,7 +44,6 @@ public class Main {
     private static int executeCommands(int molecules) {
 
         ArrayList<Triple> allTriples =
-//                EveryTriple.get(molecules);
                 getTriples(moleculeArray, new Triple(), 0, 0);
         int biggestGroupSize = 0;
         ArrayList<Triple> balancedTriples = new ArrayList<>();
@@ -55,12 +54,12 @@ public class Main {
                 balancedTriples.add(triple);
         }
 
-        ArrayList<Integer> group;
+        String group;
         for (Triple triple : balancedTriples) {
-            group = new ArrayList<>();
-            group.add(triple.left);
-            group.add(triple.middle);
-            group.add(triple.right);
+            group = "";
+            group += triple.left + ",";
+            group += triple.middle + ",";
+            group += triple.right + ",";
 
             int nextNumber = 1;
 
@@ -69,29 +68,30 @@ public class Main {
 
                 // if the group doesn't contain the root node it's bad
                 //&& nextNumber > 1)
-                if (!group.contains(1))
+                if (!group.matches(".*1.*"))// && nextNumber != 1)
                     break;
 
                 // Get a number that is not equal to the numbers currently in the triple
                 // Or the number is in the group less than there are combinations
-                while (group.contains(nextNumber)) {
+                while (group.matches(".*" + nextNumber + ".*")) {
                     nextNumber++;
                     if (nextNumber > molecules) skip = true;
                 }
                 if (skip) continue;
 
-                group.add(nextNumber);
+                group += nextNumber + ",";
                 ArrayList<Triple> newTriples = getTriples(group, new Triple(), 0, 0);
 
 
                 if (!balancedTriples.containsAll(newTriples)) {
-                    group.remove(group.size() - 1);
+                    group = group.replaceFirst(("," + nextNumber), "");//.remove(group.size() - 1);
                     nextNumber++;
                 }
             }
 
-            if (group.size() > biggestGroupSize)
-                biggestGroupSize = group.size();
+            int length = group.replaceAll("[^,]", "").length();
+            if (length > biggestGroupSize)
+                biggestGroupSize = length;
         }
 
         return biggestGroupSize;
@@ -125,8 +125,9 @@ public class Main {
     /**
      * Source: https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
      */
-    private static ArrayList<Triple> getTriples(ArrayList<Integer> arr, Triple data, int start, int index) {
-        int end = arr.size() - 1;
+    private static ArrayList<Triple> getTriples(String arr, Triple data, int start, int index) {
+        arr = arr.replace(",", "");
+        int end = arr.length() - 1;
         int r = 3;
         ArrayList<Triple> permutations = new ArrayList<>();
         // Current combination is ready to be printed, print it
@@ -140,7 +141,7 @@ public class Main {
         // at index will make a combination with remaining elements
         // at remaining positions
         for (int i = start; i <= end && end - i + 1 >= r - index; i++) {
-            data = new Triple(data, index, arr.get(i));
+            data = new Triple(data, index, i + 1);
             permutations.addAll(getTriples(arr, data, i + 1, index + 1));
         }
         return permutations;
@@ -228,7 +229,7 @@ public class Main {
 
         @Override
         public String toString() {
-            return left + " - " + middle + " - " + right;
+            return left + "-" + middle + "-" + right;
         }
 
         int get(int i) {

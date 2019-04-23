@@ -52,7 +52,7 @@ public class MainTest {
     @Test
     public void process() {
         System.setIn(anyInputStream);
-        Main.process(new Scanner(System.in));
+        Main.process(new Reader(System.in));
         assertEquals(expected, outContent.toString());
     }
 
