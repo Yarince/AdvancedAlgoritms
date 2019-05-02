@@ -174,10 +174,5 @@ public class Main {
         int getValue() {
             return value;
         }
-
-        void setValue(int value) {
-            this.value = value;
-        }
     }
-
 }
