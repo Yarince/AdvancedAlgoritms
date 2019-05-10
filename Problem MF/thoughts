@@ -1,0 +1,11 @@
+
+
+  1. Set the partial destination equal to the end point
+  2. Make straight line to the destination
+* 3. If the line hits a ray:
+* 4. Check which ray it hit
+  5. Go back to the previous save point
+  6. Set the partial destination equal to the ray start
+  7. Continue at step 2
+
+* heavy steps
