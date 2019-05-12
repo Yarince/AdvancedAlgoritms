@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5533731c-44fe-4f8d-9612-8425b1443757" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/java/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Graph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem MF/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem MF/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem MF/src/MainTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem MF/src/Reader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem MF/thoughts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem WS/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem AN/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem AN/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem AN/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem AN/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem GQ/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem GQ/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem WS/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem WS/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem WS/src/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem WS/src/Reader.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -80,7 +90,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/ProblemAITest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
@@ -114,6 +124,15 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/source/ai/901.out">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -168,7 +187,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -255,6 +274,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -313,7 +333,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -324,7 +343,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Problem GQ" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -491,6 +510,7 @@
       <workItem from="1552297662856" duration="612000" />
       <workItem from="1552333270751" duration="676000" />
       <workItem from="1554636607470" duration="14000" />
+      <workItem from="1557422200294" duration="17000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit. &#10;It's does something I guess :shrug:">
       <created>1550698859505</created>
@@ -598,12 +618,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102689000" />
+    <option name="totallyTimeSpent" value="102706000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1922" height="1037" extended-state="6" />
+    <frame x="-1" y="0" width="1922" height="1039" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49918434" visible="true" weight="0.12966916" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49918434" visible="true" weight="0.1307364" />
       <window_info id="Structure" order="1" sideWeight="0.5008157" side_tool="true" weight="0.40789473" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -626,7 +646,6 @@
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32968238" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32858709" />
-      <window_info anchor="right" id="SciView" />
       <window_info anchor="right" auto_hide="true" x="0" y="0" width="430" height="837" id="Documentation" order="0" weight="0.32977587" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -637,6 +656,7 @@
       <window_info anchor="right" id="Maven" order="7" visible="true" weight="0.1755603" />
       <window_info anchor="right" id="Capture Analysis" order="8" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="SciView" order="10" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918434" visible="true" weight="0.40789473" />
@@ -904,13 +924,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/source/ai/901.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/source/ai/902.out">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1006,16 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/oldsht/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1044,6 +1047,23 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/oldsht/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/source/ai/901.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>

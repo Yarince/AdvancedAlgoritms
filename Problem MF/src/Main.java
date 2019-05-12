@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -6,7 +8,14 @@ public class Main {
     static StringBuilder result = new StringBuilder();
 
     public static void main(String[] args) {
-        process(new Reader(System.in));
+//        process(new Reader(System.in));
+        Point p1 = new Point(4, 1);
+        Point q1 = new Point(1, 1);
+        Point p2 = new Point(4, 1);
+        Point q2 = new Point(4, 0);
+        System.out.println("intersect: " + intersect(p1, q1, p2, q2));
+        System.out.println("isOnLineSegment: " + isOnLineSegment(p2, q2, q1));
+
     }
 
     static void process(Reader reader) {
@@ -18,23 +27,31 @@ public class Main {
 
                 int kLines = reader.nextInt();
 
-                Point destination = new Point(reader.nextInt(), reader.nextInt());
-                // 0: X
-                // 1: Y
-                // 2: Angle from X axis
-                Point[][] deathlyRays = new Point[kLines][2];
+                int destX = reader.nextInt();
+                int destY = reader.nextInt();
+                Point destination = new Point(destX, destY);
 
+                Point[][] deathlyRays = new Point[kLines][2];
                 for (int j = 0; j < kLines; j++) {
                     Point startPoint = new Point(reader.nextInt(), reader.nextInt());
                     deathlyRays[j][0] = startPoint;
                     int angle = reader.nextInt();
-                    double endX = startPoint.x + 1000000 * Math.sin(angle);
-                    double endY = startPoint.y + 1000000 * Math.cos(angle);
+                    double angleRadian = Math.toRadians(angle);// angle * Math.PI / 180.0;
+                    int length = 10000000;
+//                    int length = 3;
+                    double endX = startPoint.x + (length * Math.cos(angleRadian));
+                    double endY = startPoint.y + (length * Math.sin(angleRadian));
+
+                    DecimalFormat df = new DecimalFormat("#.####");
+                    df.setMinimumFractionDigits(4);
+                    endX = Double.parseDouble(df.format(endX));
+                    endY = Double.parseDouble(df.format(endY));
+
                     Point endPoint = new Point(endX, endY);
                     deathlyRays[j][1] = endPoint;
                 }
-
                 result.append(i).append(": ");
+//                drawInCanvas(destination, deathlyRays);
                 executeMethod(destination, deathlyRays);
                 if (i != numCases) {
                     result.append("\n");
@@ -48,41 +65,77 @@ public class Main {
         }
     }
 
+    private static void drawInCanvas(Point destination, Point[][] deathlyRays) {
+        JFrame testFrame = new JFrame();
+        testFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        final LinesComponent comp = new LinesComponent();
+        comp.setPreferredSize(new Dimension(300, 300));
+        testFrame.getContentPane().add(comp, BorderLayout.CENTER);
+
+        int center = 150;
+        comp.addLine(center, center, (int) destination.x + center * 2, (int) destination.y + center * 2, new Color(50, center, 0));
+
+
+        for (Point[] deathlyRay : deathlyRays) {
+            Point start = deathlyRay[0];
+            Point end = deathlyRay[1];
+
+            comp.addLine((int) start.x + center, (int) start.y + center, (int) end.x + center, (int) end.y + center);
+            result.append(start).append("-->").append(end);
+        }
+        testFrame.pack();
+        testFrame.setVisible(true);
+    }
+
+    /**
+     * As David Eisenstat mentions, you require the shortest bitonic tour covering each point.
+     * <p>
+     * This can be done through dynamic programming in O(n^2) time.
+     * <p>
+     * Let Pij (1 <= i <= j <= n) be a bitonic path from point pi to pj such that the path starts from pi,
+     * goes strictly left to p1, then goes strictly right to pj,
+     * in the process covering all the points to the left of pj.
+     * <p>
+     * Let d[i,j] be the length of the shortest such path from i to j.
+     * <p>
+     * Note that d[1,2] = dist(p1,p2)
+     * d[1,3] = d[1,2] + dist(p2,p3).
+     * d[i,j] = d[i,j-1] + dist(j-1,j) for i < j-1.
+     * d[j-1,j] = min( d[k,j-1] + dist(k,j) ) for 1 <= k < j-1
+     */
     private static void executeMethod(Point destination, Point[][] deathlyRays) {
-        /*
-        As David Eisenstat mentions, you require the shortest bitonic tour covering each point.
-
-        This can be done through dynamic programming in O(n^2) time.
-
-        Let Pij (1 <= i <= j <= n) be a bitonic path from point pi to pj such that the path starts from pi,
-        goes strictly left to p1, then goes strictly right to pj,
-        in the process covering all the points to the left of pj.
-
-        Let d[i,j] be the length of the shortest such path from i to j.
-
-        Note that d[1,2] = dist(p1,p2)
-        d[1,3] = d[1,2] + dist(p2,p3).
-        d[i,j] = d[i,j-1] + dist(j-1,j) for i < j-1.
-        d[j-1,j] = min( d[k,j-1] + dist(k,j) ) for 1 <= k < j-1
-         */
 
         Point start = new Point(0, 0);
         Point savePoint = new Point(0, 0);
         ArrayList<Point> intermediatePoints = new ArrayList<>();
+
+        for (Point[] deathlyRay : deathlyRays) {
+            if (isOnLineSegment(deathlyRay[0], deathlyRay[1], destination)) {
+                result.append("inf");
+                return;
+            }
+        }
 
         double distance = 0.0;
 
         // Point[] visited = new Point[(int) (destination.x * destination.y) - deathlyRays.length];
 
         int visited = 0;
-        int totalvisiblePoints = (int) ((destination.x+1) * (destination.y+1)) - deathlyRays.length;
+        int totalvisiblePoints = (int) ((destination.x + 1) * (destination.y + 1)) - deathlyRays.length;
+        totalvisiblePoints += 50;
         boolean lineInterseects = false;
         while (!savePoint.equals(destination) && visited != totalvisiblePoints) {
             visited++;
             for (Point[] deathlyRay : deathlyRays) {
                 lineInterseects = intersect(savePoint, destination, deathlyRay[0], deathlyRay[1]);
                 if (lineInterseects) {
+
+                    // Remove savepoint because it adds another intesections
+                    // NOTE WRONG!!!!!!!
+                    if (intermediatePoints.size() > 0) intermediatePoints.remove(intermediatePoints.size() - 1);
+
                     savePoint = deathlyRay[0];
+                    intermediatePoints.add(savePoint);
                     break;
                 }
             }
@@ -96,9 +149,9 @@ public class Main {
         else
         // TODO Format to always show 4 decimal
         {
-            DecimalFormat df = new DecimalFormat("#.######");
+            DecimalFormat df = new DecimalFormat("#.####");
 //            df.setRoundingMode(RoundingMode.HALF_UP);
-            df.setMinimumFractionDigits(6);
+            df.setMinimumFractionDigits(4);
             result.append(df.format(distance));
         }
     }
@@ -117,26 +170,38 @@ public class Main {
     }
 
     private static double calculateDistanceBetweenNPoints(Point start, Point end) {
-        return Math.sqrt(end.y - start.y) * (end.y - start.y) + (end.x - start.x) * (end.x - start.x);
+        return Math.sqrt(Math.pow((end.y - start.y), 2) + Math.pow((end.x - start.x), 2));
     }
 
-    private static boolean intersect(Point savepoint, Point destination, Point deathRayStart, Point deathRayEnd) {
-        if (isPointOnTheLine(savepoint, destination, deathRayStart)) return true;
-        else if (isPointOnTheLine(savepoint, destination, deathRayEnd)) return true;
-        else if (isPointOnTheLine(deathRayStart, deathRayEnd, savepoint)) return true;
-        else return isPointOnTheLine(deathRayStart, deathRayEnd, destination);
+    public static int orientation(Point p, Point q, Point r) {
+        double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+
+        if (val == 0.0)
+            return 0; // colinear
+        return (val > 0) ? 1 : 2; // clock or counterclock wise
     }
 
-    private static boolean isPointOnTheLine(Point A, Point B, Point C) {
-        // if AC is vertical
-        if (A.x == C.x) return false;
-        // if AC is horizontal
-        if (A.y == C.y) return false;
-        // match the gradients
-        return (A.x - C.x) * (A.y - C.y) == (C.x - B.x) * (C.y - B.y);
+    public static boolean intersect(Point p1, Point q1, Point p2, Point q2) {
+
+        if (isOnLineSegment(p1, p2, q2)) return true;
+        if (p1.equals(p2) || q1.equals(q2) || p1.equals(q2) || q1.equals(p2)) return false;
+
+        int o1 = orientation(p1, q1, p2);
+        int o2 = orientation(p1, q1, q2);
+        int o3 = orientation(p2, q2, p1);
+        int o4 = orientation(p2, q2, q1);
+
+        return o1 != o2 && o3 != o4;
+
     }
 
-    private static class Point {
+    static boolean isOnLineSegment(Point startPoint, Point endPoint, Point test) {
+
+        return ((test.y - startPoint.y) / (test.x - startPoint.x) == (test.y - endPoint.y) / (test.x - endPoint.y));
+
+    }
+
+    public static class Point {
         double x;
         double y;
 

@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fecd6dff-ec7e-4a8e-9769-36b054b08885" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Problem CR/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Problem CR/src/Tree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Problem CR/src/thoughtsandprayers.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Problem TN/thoughts.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Problem CR/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem CR/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Problem CR/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem CR/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Problem CR/src/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem CR/src/MainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/source/BitonicTSP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem MF/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem MF/src/LinesComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Problem WS/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem AI/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem AI/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem AI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem AI/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem AN/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem AN/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem AN/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem AN/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Problem TN/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem TN/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem MF/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem MF/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Problem MF/thoughts" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem MF/thoughts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -127,7 +128,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/MainTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="831">
+                <state relative-caret-position="720">
                   <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -151,12 +152,24 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Graph.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="615">
-                  <caret line="46" selection-start-line="46" selection-end-line="46" />
+                <state relative-caret-position="1365">
+                  <caret line="93" column="47" selection-start-line="90" selection-start-column="8" selection-end-line="93" selection-end-column="47" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#2652#2653#0" expanded="true" />
                     <element signature="e#2690#2691#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/source/BitonicTSP.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2130">
+                  <caret line="142" column="51" selection-start-line="142" selection-start-column="51" selection-end-line="142" selection-end-column="51" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -249,7 +262,12 @@
       <find>prin</find>
       <find>arra</find>
       <find>toArr</find>
+      <find>Vertex</find>
     </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>Point</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -274,6 +292,7 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Graph.java" />
         <option value="$PROJECT_DIR$/src/MainTest.java" />
+        <option value="$PROJECT_DIR$/src/source/BitonicTSP.java" />
       </list>
     </option>
   </component>
@@ -300,17 +319,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Problem GQ" type="b2602c69:ProjectViewProjectNode" />
               <item name="Problem GQ" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Problem GQ" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Problem GQ" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Problem GQ" type="b2602c69:ProjectViewProjectNode" />
@@ -338,7 +353,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -361,7 +375,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.146875" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -481,6 +495,9 @@
       <workItem from="1554026998691" duration="1814000" />
       <workItem from="1554636597285" duration="9000" />
       <workItem from="1554990271492" duration="1302000" />
+      <workItem from="1556796291380" duration="46000" />
+      <workItem from="1557422220250" duration="3192000" />
+      <workItem from="1557659318789" duration="1771000" />
     </task>
     <task id="LOCAL-00001" summary="Problem Graph Query. A new beginning....">
       <created>1551458248997</created>
@@ -567,7 +584,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55308000" />
+    <option name="totallyTimeSpent" value="60317000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -579,10 +596,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1922" height="1037" extended-state="6" />
+    <frame x="-1" y="0" width="1922" height="1039" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15528281" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16008538" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -859,10 +876,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/FindK.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/source/BitonicTSP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2130">
+          <caret line="142" column="51" selection-start-line="142" selection-start-column="51" selection-end-line="142" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -879,12 +916,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainTest.java">
+    <entry file="file://$PROJECT_DIR$/src/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+        <state relative-caret-position="1365">
+          <caret line="93" column="47" selection-start-line="90" selection-start-column="8" selection-end-line="93" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2652#2653#0" expanded="true" />
+            <element signature="e#2690#2691#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -928,18 +967,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Graph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2652#2653#0" expanded="true" />
-            <element signature="e#2690#2691#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
